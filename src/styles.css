@@ -19,6 +19,17 @@
  */
 
 @theme inline {
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-gold: var(--brand-gold);
+  --color-surface-blue: var(--surface-blue);
+  --color-surface-purple: var(--surface-purple);
+  --color-surface-soft: var(--surface-soft);
+  --color-footer: var(--footer-bg);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -140,5 +151,104 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+  }
+}
+
+/* ---- CUB TO KING brand layer ---- */
+:root {
+  --brand-cyan: oklch(0.71 0.115 221);
+  --brand-blue: oklch(0.62 0.112 234);
+  --brand-purple: oklch(0.36 0.108 320);
+  --brand-navy: oklch(0.25 0.032 266);
+  --brand-gold: oklch(0.75 0.128 82);
+  --surface-soft: oklch(0.98 0.004 250);
+  --surface-blue: oklch(0.972 0.017 210);
+  --surface-purple: oklch(0.963 0.014 320);
+  --footer-bg: oklch(0.285 0.098 305);
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.25 0.032 266);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.032 266);
+  --primary: oklch(0.62 0.112 234);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.972 0.017 210);
+  --secondary-foreground: oklch(0.36 0.108 320);
+  --muted: oklch(0.972 0.006 250);
+  --muted-foreground: oklch(0.52 0.02 262);
+  --accent: oklch(0.963 0.014 320);
+  --accent-foreground: oklch(0.36 0.108 320);
+  --border: oklch(0.92 0.008 250);
+  --input: oklch(0.92 0.008 250);
+  --ring: oklch(0.71 0.115 221);
+  --radius: 1rem;
+
+  --gradient-brand: linear-gradient(100deg, var(--brand-cyan), var(--brand-blue) 45%, var(--brand-purple));
+  --gradient-soft: linear-gradient(140deg, var(--surface-blue), oklch(1 0 0) 45%, var(--surface-purple));
+  --shadow-soft: 0 1px 2px oklch(0.25 0.032 266 / 0.04), 0 12px 32px -12px oklch(0.25 0.032 266 / 0.14);
+  --shadow-lift: 0 2px 6px oklch(0.25 0.032 266 / 0.05), 0 28px 60px -24px oklch(0.36 0.108 320 / 0.28);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+@utility text-gradient-brand {
+  background-image: var(--gradient-brand);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility surface-card {
+  background-color: oklch(1 0 0 / 0.72);
+  backdrop-filter: blur(14px);
+  border: 1px solid oklch(0.92 0.008 250);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s, border-color 0.35s;
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, oklch(0.62 0.112 234 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.62 0.112 234 / 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(18px,-24px,0) scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }
